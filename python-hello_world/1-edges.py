@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 word = "Holberton"
 word_first_3 = word[:3]
 print("First 3 letters: {}".format(word_first_3))
