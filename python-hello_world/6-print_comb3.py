@@ -1,11 +1,9 @@
 #!/usr/bin/python3
-def print_combinations(start_digit, end_digit):
-    for digit1 in range(start_digit, end_digit + 1):
-        for digit2 in range(digit1 + 1, end_digit + 1):
-            print("{}{}".format(digit1, digit2), end=", ")
-
-def main():
-    print_combinations(0, 9)
-
-if __name__ == "__main__":
-    main()
+for tens_digit in range(10):
+    for ones_digit in range(tens_digit + 1, 10):
+        print("{:d}{:d}".format(tens_digit, ones_digit), end="")
+        if(tens_digit != 8 or ones_digit != 9):
+            print(", ", end="")
+        else:
+            
+            print()
