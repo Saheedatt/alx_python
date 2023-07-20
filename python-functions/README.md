@@ -1,0 +1,1 @@
+We are learning how to work with functions to wrap up our classes for this week.
