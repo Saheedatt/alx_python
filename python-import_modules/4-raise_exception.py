@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 def raise_exception():
-    try:
-        raise TypeError("This is a type exception!")
-    except TypeError:
-        print("Exception has been raised")
+    raise TypeError("This is a type exception!")
 
-raise_exception()
+try:
+    raise_exception()
+except TypeError as te:
+    print("Exception has been raised")
