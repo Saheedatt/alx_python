@@ -1,8 +1,11 @@
 #!/usr/bin/python3
-a = 1
-b = 2
+if __name__ == "__main__":
+    from add_0 import add
 
-# Importing the add function from add_0.py
-from add_0 import add as FAKE_add
+    a = 1
+    b = 2
 
-print("{} + {} = {}".format(a, b, FAKE_add(a, b)))
+    result = add(a, b)
+
+    print("{a} + {b} = {result}".format(a=a, b=b, result=result))
+
