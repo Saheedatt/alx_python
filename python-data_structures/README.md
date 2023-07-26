@@ -1,0 +1,1 @@
+This week, we begin with Data Structures: Lists and Tupules
