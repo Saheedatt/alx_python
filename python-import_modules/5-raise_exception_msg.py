@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-def raise_exception_msg():
-    user_input = input("Enter a custom message for the NameError: ")
-    raise NameError(user_input)
+def raise_exception_msg(message=""):
+    raise NameError(message)
 
 try:
-    raise_exception_msg()
+    custom_message = input("Enter a custom message for the NameError: ")
+    raise_exception_msg(custom_message)
 except NameError as ne:
     print(ne)
