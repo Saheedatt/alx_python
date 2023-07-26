@@ -3,7 +3,16 @@ def raise_exception_msg(message=""):
     raise NameError(message)
 
 try:
-    custom_message = input("Enter a custom message for the NameError: ")
-    raise_exception_msg(custom_message)
+    raise_exception_msg("C is fun")
+except NameError as ne:
+    print(ne)
+
+try:
+    raise_exception_msg("Python is cool")
+except NameError as ne:
+    print(ne)
+
+try:
+    raise_exception_msg("")
 except NameError as ne:
     print(ne)
