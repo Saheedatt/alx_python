@@ -1,0 +1,1 @@
+This week, we are learning about classes and objects in Object Oriented Programming for Python.
