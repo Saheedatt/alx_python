@@ -5,7 +5,7 @@ This module defines a function to check if object is
 exactly an instance of a specified class.
 
 Function:
-    is_same_class(obj, a_class): Checks if object is 
+    is_same_class(obj, a_class): Checks if object is
     exactly an instance of the specified class.
 
 """
@@ -93,7 +93,9 @@ class Rectangle(BaseGeometry):
             int: The area of the rectangle.
         """
         return self.__width * self.__height
-def get_width(self):
+    
+
+    def get_width(self):
         """
         Get the width of the rectangle.
 
@@ -102,7 +104,8 @@ def get_width(self):
         """
         return self.__width
 
-def get_height(self):
+
+    def get_height(self):
         """
         Get the height of the rectangle.
 
@@ -111,7 +114,8 @@ def get_height(self):
         """
         return self.__height
 
-def __str__(self):
+
+    def __str__(self):
         """
         Return the string representation of the rectangle.
 
