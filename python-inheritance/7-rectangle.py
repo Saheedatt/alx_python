@@ -1,4 +1,12 @@
 #!/usr/bin/python3
+"""
+This module defines a function to check if object is exactly an instance of a specified class.
+
+Function:
+    is_same_class(obj, a_class): Checks if object is exactly an instance of the specified class.
+
+"""
+
 class BaseGeometry:
     """
     This is a class representing the base geometry.
