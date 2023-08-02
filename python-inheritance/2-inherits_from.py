@@ -5,7 +5,7 @@ This module defines a function to check if object is
 exactly an instance of a specified class.
 
 Function:
-    is_same_class(obj, a_class): Checks if object is 
+    is_same_class(obj, a_class): Checks if object is
     exactly an instance of the specified class.
 
 """
@@ -27,7 +27,7 @@ def inherits_from(obj, a_class):
     """
     current_class = type(obj)
     while current_class is not object:
-        if current_class is a_class or a_class in current_class.__bases__:
+        if (current_class is a_class or a_class in current_class.__bases__ or issubclass(current_class, a_class)):
             return True
         current_class = current_class.__base__
     return False

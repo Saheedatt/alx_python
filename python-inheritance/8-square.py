@@ -93,27 +93,6 @@ class Rectangle(BaseGeometry):
             int: The area of the rectangle.
         """
         return self.__width * self.__height
-    
-
-    def get_width(self):
-        """
-        Get the width of the rectangle.
-
-        Returns:
-            int: The width of the rectangle.
-        """
-        return self.__width
-
-
-    def get_height(self):
-        """
-        Get the height of the rectangle.
-
-        Returns:
-            int: The height of the rectangle.
-        """
-        return self.__height
-
 
     def __str__(self):
         """
