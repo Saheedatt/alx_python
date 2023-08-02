@@ -1,0 +1,1 @@
+We learn about inheritance, polymorphism and magic methods.
