@@ -21,4 +21,17 @@ class BaseGeometry:
     Methods:
         None
     """
-    pass
+    def __init__(self):
+        """
+        Initialize a BaseGeometry object.
+        """
+        pass
+
+    def __repr__(self):
+        """
+        Return a string representation of the geometric object.
+
+        Returns:
+            A string representation of the geometric object.
+        """
+        return f"BaseGeometry()"
