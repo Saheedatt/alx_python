@@ -13,7 +13,7 @@ class Square:
     This class represents a square.
 
     Attributes:
-        size (int): The size of the square.
+        __size (int): The size of the square.
 
     Methods:
         __init__(self, size=0): Initializes a Square instance
@@ -27,6 +27,6 @@ class Square:
         Constructor for Square class.
 
         Args:
-            size (int): The size of the square (default is 0).
+            __size (int): The size of the square (default is 0).
         """
-        self._size = size
+        self.__size = size
