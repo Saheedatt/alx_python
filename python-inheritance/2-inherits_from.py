@@ -25,9 +25,6 @@ def inherits_from(obj, a_class):
         bool: True if the object is an instance of the specified
         class or its subclass; otherwise, False.
     """
-    current_class = type(obj)
-    while current_class is not object:
-        if (current_class is a_class or a_class in current_class.__bases__ or issubclass(current_class, a_class)):
-            return True
-        current_class = current_class.__base__
-    return False
+    if isinstance(obj, type):
+        return issubclass(obj, a_class)
+    return isinstance(obj, a_class) and obj.__class__ != a_class

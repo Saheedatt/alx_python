@@ -8,6 +8,7 @@ Function:
 
 """
 
+
 class BaseGeometry:
     """
     This is a class representing the base geometry.
@@ -47,9 +48,9 @@ class BaseGeometry:
             None
         """
         if not isinstance(value, int):
-            raise TypeError(f"{name} must be an integer")
+            raise TypeError("{} must be an integer".format(name))
         if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
+            raise ValueError("{} must be greater than 0".format(name))
 
 
 class Rectangle(BaseGeometry):
@@ -75,7 +76,8 @@ class Rectangle(BaseGeometry):
             TypeError, if width or height is not an integer.
             ValueError, ff width or height is <=.
         """
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
+        
         self.__width = width
         self.__height = height
+        self.integer_validator("width", self.__width)
+        self.integer_validator("height", self.__height)

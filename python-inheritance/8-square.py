@@ -51,11 +51,8 @@ class BaseGeometry:
         Returns:
             None
         """
-        if not isinstance(value, int):
-            raise TypeError(f"{name} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
-
+        if not isinstance(value, int) or value <= 0:
+            raise ValueError(f"{name} must be a positive integer")
 
 class Rectangle(BaseGeometry):
     """
@@ -80,10 +77,10 @@ class Rectangle(BaseGeometry):
             TypeError when width or height is not an integer.
             ValueError wheh width or height is <= 0.
         """
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
         self.__width = width
         self.__height = height
+        self.integer_validator("width", self.__width)
+        self.integer_validator("height", self.__height)
 
     def area(self):
         """
@@ -126,9 +123,9 @@ class Square(Rectangle):
             TypeError when size is not an integer.
             ValueError when size is <=.
         """
-        self.integer_validator("size", size)
+
         super().__init__(size, size)
-        self.__size = size
+
 
     def get_size(self):
         """
