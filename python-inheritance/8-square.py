@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 
 """
-This module defines a function to check if object is exactly an instance of a specified class.
+This module defines a function to check if object is
+exactly an instance of a specified class.
 
 Function:
-    is_same_class(obj, a_class): Checks if object is exactly an instance of the specified class.
+    is_same_class(obj, a_class): Checks if object is 
+    exactly an instance of the specified class.
 
 """
+
 
 class BaseGeometry:
     """
@@ -18,8 +21,10 @@ class BaseGeometry:
         None
 
     Methods:
-        area(self): Raises an Exception with the message "area() is not implemented".
-        integer_validator(self, name, value): Validates the value as an integer and raises exceptions if invalid.
+        area(self): Raises an Exception with the message
+        "area() is not implemented".
+        integer_validator(self, name, value): Validates the
+        value as an integer and raises exceptions if invalid.
     """
 
     def area(self):
@@ -88,13 +93,31 @@ class Rectangle(BaseGeometry):
             int: The area of the rectangle.
         """
         return self.__width * self.__height
+def get_width(self):
+        """
+        Get the width of the rectangle.
 
-    def __str__(self):
+        Returns:
+            int: The width of the rectangle.
+        """
+        return self.__width
+
+def get_height(self):
+        """
+        Get the height of the rectangle.
+
+        Returns:
+            int: The height of the rectangle.
+        """
+        return self.__height
+
+def __str__(self):
         """
         Return the string representation of the rectangle.
 
         Returns:
-            str: The rectangle description in the format [Rectangle] <width>/<height>.
+            str: The rectangle description in the format
+            [Rectangle] <width>/<height>.
         """
         return "[Rectangle] {}/{}".format(self.__width, self.__height)
 
@@ -123,3 +146,22 @@ class Square(Rectangle):
         self.integer_validator("size", size)
         super().__init__(size, size)
         self.__size = size
+
+    def get_size(self):
+        """
+        Get the size of the square.
+
+        Returns:
+            int: The size of the square.
+        """
+        return self.__size
+
+    def __str__(self):
+        """
+        Return the string representation of the square.
+
+        Returns:
+            str: The square description in the format
+            [Square] <size>/<size>.
+        """
+        return "[Square] {}/{}".format(self.__size, self.__size)

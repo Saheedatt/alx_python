@@ -8,6 +8,7 @@ Function:
 
 """
 
+
 class BaseGeometry:
     """
     This is a class representing the base geometry.
