@@ -22,15 +22,6 @@ class BaseGeometry:
         area(self):Raises an Exception with the message "area() is not implemented".
         integer_validator(self, name, value): Validates the value as an integer and raises exceptions if invalid.
     """
-    def __dir__(self):
-        """
-        Get the list of attributes from the parent class (object class)
-        """
-        attributes = super().__dir__()
-        """
-        Exclude __init_subclass__ from the list of attributes
-        """
-        return [attribute for attribute in attributes if attribute != '__init_subclass__']
 
     def area(self):
         """
@@ -40,6 +31,27 @@ class BaseGeometry:
         the area of the specific geometry.
         """
         raise Exception("area() is not implemented")
+
+    def integer_validator(self, name, value):
+        """
+        Validates the value as an integer and raises exceptions if invalid.
+
+        Parameters:
+            name (str): The name of the value to be validated.
+            value: The value to be validated.
+
+        Raises:
+            TypeError, if the value is not an integer.
+            ValueError, if the value is <= 0.
+
+        Returns:
+            None
+        """
+        if not isinstance(value, int):
+            raise TypeError("{} must be an integer".format(name))
+        if value <= 0:
+            raise ValueError("{} must be greater than 0".format(name))
+
 
 class Rectangle(BaseGeometry):
     """
@@ -67,26 +79,5 @@ class Rectangle(BaseGeometry):
         
         self.__width = width
         self.__height = height
-        self.integer_validator(self.__width, "width")
-        self.integer_validator(self.__height, "height")
-
-    def integer_validator(self, value, attribute):
-        """
-        Validates the value as an integer and raises exceptions if invalid.
-
-        Parameters:
-            name (str): The name of the value to be validated.
-            value: The value to be validated.
-
-        Raises:
-            TypeError, if the value is not an integer.
-            ValueError, if the value is <= 0.
-
-        Returns:
-            None
-        """
-        if not isinstance(value, int) or value <= 0:
-            raise ValueError(f"{attribute} must be a positive integer")
-        
-    def area(self):
-        return self.__width * self.__height
+        self.integer_validator("width", self.__width)
+        self.integer_validator("height", self.__height)
