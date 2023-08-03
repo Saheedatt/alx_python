@@ -21,12 +21,6 @@ class BaseGeometry:
         integer_validator(self, name, value): Validates the value as an integer and raises exceptions if invalid.
     """
 
-    def __dir__(self):
-        """ Get the list of attributes from the parent class (object class)"""
-        attributes = super().__dir__()
-        """ Exclude __init_subclass__ from the list of attributes"""
-        return [attribute for attribute in attributes if attribute != '__init_subclass__']
-    
     def area(self):
         """
         Raises an Exception with the message "area() is not implemented".
@@ -79,8 +73,8 @@ class Rectangle(BaseGeometry):
             TypeError if width or height is not an integer.
             ValueError if width or height is less than or equal to 0.
         """
-        self.integer_validator("width", self.__width)
-        self.integer_validator("height", self.__height)
+        self.integer_validator("width", width)
+        self.integer_validator("height", height)
         self.__width = width
         self.__height = height
 
@@ -101,3 +95,15 @@ class Rectangle(BaseGeometry):
             str: The rectangle description in the format [Rectangle] <width>/<height>.
         """
         return "[Rectangle] {}/{}".format(self.__width, self.__height)
+    def __dir__(self):
+        """
+        Customizes the list of attributes and methods returned by the dir() function.
+
+        This method overrides the default dir() behavior to exclude the '__init_subclass__'
+        attribute from the list.
+
+        Returns:
+            list: The list of attributes and methods of the Rectangle class (excluding '__init_subclass__').
+        """       
+        attributes = super().__dir__()
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
