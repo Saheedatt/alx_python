@@ -21,7 +21,11 @@ class BaseGeometry:
     Methods:
         None
     """
+    def __dir__(self):
+        """
+        Get the list of attributes from the parent class (object class)
+        """
+        attributes = super().__dir__()
 
-    __doc__ = "This is an empty class representing our base geometry."
-    
-    pass
+        # Exclude __init_subclass__ from the list of attributes
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
