@@ -92,8 +92,7 @@ class Rectangle(BaseGeometry):
         Returns:
             int: The area of the rectangle.
         """
-        return self.__width * self.__height
-    
+        return self.__width * self.__height 
     def get_width(self):
         """
         Get the width of the rectangle.
@@ -121,6 +120,20 @@ class Rectangle(BaseGeometry):
             [Rectangle] <width>/<height>.
         """
         return "[Rectangle] {}/{}".format(self.__width, self.__height)
+    
+    def __dir__(self):
+        """
+        Customizes the list of attributes and methods returned by the dir() function.
+
+        This method overrides the default dir() behavior to exclude the '__init_subclass__'
+        attribute from the list.
+
+        Returns:
+            list: The list of attributes and methods of the Rectangle class (excluding '__init_subclass__').
+        """
+       
+        attributes = super().__dir__()
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
 
 
 class Square(Rectangle):

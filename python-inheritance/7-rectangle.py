@@ -104,6 +104,7 @@ class Rectangle(BaseGeometry):
 
         Returns:
             list: The list of attributes and methods of the Rectangle class (excluding '__init_subclass__').
-        """       
+        """
+       
         attributes = super().__dir__()
         return [attribute for attribute in attributes if attribute != '__init_subclass__']
