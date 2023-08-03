@@ -22,7 +22,12 @@ class BaseGeometry:
         area(self):Raises an Exception with the message "area() is not implemented".
         integer_validator(self, name, value): Validates the value as an integer and raises exceptions if invalid.
     """
-
+    def __dir__(self):
+        """ Get the list of attributes from the parent class (object class)"""
+        attributes = super().__dir__()
+        """ Exclude __init_subclass__ from the list of attributes"""
+        return [attribute for attribute in attributes if attribute != '__init_subclass__']
+    
     def area(self):
         """
         Raises an Exception with the message "area() is not implemented".
