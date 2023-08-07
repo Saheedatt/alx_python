@@ -151,10 +151,14 @@ class Rectangle(Base):
     
     def display(self):
         """
-        Display the rectangle using '#' characters in stdout
+        Display the rectangle using '#' characters in stdout,
+        accounting for x and y offsets.
         """
+        for _ in range(self.y):
+            print()
+
         for _ in range(self.height):
-            print("#" * self.width)
+            print(" " * self.x + "#" * self.width)
     
     def __str__(self):
         """
@@ -164,3 +168,21 @@ class Rectangle(Base):
          str: A string in the format [Rectangle] (<id>) <x>/<y> - <width>/<height>.
         """
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
+    def update(self, *args):
+        """
+          Update the attributes of the rectangle using the provided arguments.
+
+        Args:
+            *args: Arguments in the order: id, width, height, x, y.
+        """
+        if len(args) >= 1:
+            self.id = args[0]
+        if len(args) >= 2:
+            self.width = args[1]
+        if len(args) >= 3:
+            self.height = args[2]
+        if len(args) >= 4:
+            self.x = args[3]
+        if len(args) >= 5:
+            self.y = args[4]
