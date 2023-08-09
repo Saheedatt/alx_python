@@ -16,13 +16,10 @@ def fetch_and_display_x_request_id(url):
     response = requests.get(url)
     if response.ok:
         x_request_id = response.headers.get('X-Request-Id')
-        if x_request_id is not None and isinstance(x_request_id, str):
+        if x_request_id is not None:
             print(x_request_id)
         else:
-            if x_request_id is None:
-                print("No X-Request-Id header found in response")
-            else:
-                print("Invalid X-Request-Id header value: {}".format(x_request_id))
+            print("No X-Request-Id header found in response")
     else:
         print("Request failed")
 
