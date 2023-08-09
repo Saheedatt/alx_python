@@ -25,16 +25,25 @@ def get_user_id(username, personal_access_token):
 
     try:
         response = requests.get(url, auth=auth)
-        user_data = response.json()
 
-        if "id" in user_data:
-            print(f"User ID: {user_data['id']}")
+        if response.status_code == 200:
+            user_data = response.json()
+            user_id = user_data.get("id")
+            
+            if user_id is not None:
+                print(f"User ID: {user_id}")
+            else:
+                print("Unable to fetch user ID.")
         else:
-            print("Unable to fetch user ID.")
+            print(f"Request failed with status code: {response.status_code}")
+            print("Response content:", response.content)
     except requests.RequestException as e:
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    username = sys.argv[1]
-    personal_access_token = sys.argv[2]
-    get_user_id(username, personal_access_token)
+    if len(sys.argv) != 3:
+        print("Usage: python github_user_id.py <username> <personal_access_token>")
+    else:
+        username = sys.argv[1]
+        personal_access_token = sys.argv[2]
+        get_user_id(username, personal_access_token)

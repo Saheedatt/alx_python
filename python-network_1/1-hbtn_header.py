@@ -31,3 +31,28 @@ if __name__ == '__main__':
     url = sys.argv[1]
     fetch_and_display_x_request_id(url)
 
+
+
+import sys
+import requests
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <URL>")
+        return
+
+    url = sys.argv[1]
+
+    try:
+        response = requests.get(url)
+        x_request_id = response.headers.get('X-Request-Id')
+
+        if x_request_id:
+            print(f"X-Request-Id value: {x_request_id}")
+        else:
+            print("X-Request-Id header not found in the response.")
+    except requests.RequestException as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    main()
