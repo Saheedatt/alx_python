@@ -14,11 +14,10 @@ def fetch_and_display_x_request_id(url):
     header of the given URL and displays it.
     """
     response = requests.get(url)
-    
-    x_request_id = response.headers.get('X-Request-Id')
-    
-    if x_request_id is not None:
-        print(x_request_id)
+    if response.ok:
+        x_request_id = response.headers.get('X-Request-Id')
+        if x_request_id is not None:
+            print(x_request_id)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
