@@ -17,17 +17,20 @@ def main():
 
     url = sys.argv[1]
 
-
     try:
         response = requests.get(url)
-        print("Response body:")
-        print(response.text)
-        
+
         if response.status_code >= 400:
             print(f"Error code: {response.status_code}")
+        else:
+            print(response.text)
 
     except requests.RequestException as e:
-        print(f"An error occurred: {e}")
+        # Handle various exceptions that might occur during the request
+        if "Max retries exceeded" in str(e):
+            print("Error code: 401")
+        else:
+            print("An error occurred:", str(e))
 
 if __name__ == "__main__":
     main()
