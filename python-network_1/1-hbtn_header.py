@@ -14,7 +14,7 @@ def fetch_and_display_x_request_id(url):
     """
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Raise an error for non-200 status codes
+        response.raise_for_status() 
         x_request_id = response.headers.get('X-Request-Id')
         if x_request_id is not None:
             print(x_request_id)
@@ -48,7 +48,7 @@ def main():
         x_request_id = response.headers.get('X-Request-Id')
 
         if x_request_id:
-            print(f"X-Request-Id value: {x_request_id}")
+            print(f"{x_request_id}")
         else:
             print("X-Request-Id header not found in the response.")
     except requests.RequestException as e:

@@ -46,4 +46,4 @@ if __name__ == "__main__":
     else:
         username = sys.argv[1]
         personal_access_token = sys.argv[2]
-        get_user_id(username, personal_access_token)
+        get_user_id(username, personal_access_token) 
