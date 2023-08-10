@@ -7,52 +7,36 @@ Module to fetch and display the value of the X-Request-Id variable in the respon
 import requests
 import sys
 
-def fetch_and_display_x_request_id(url):
-    """
-    Fetches the value of X-Request-Id variable in the response
-    header of the given URL and displays it.
-    """
-    try:
-        response = requests.get(url)
-        response.raise_for_status() 
-        x_request_id = response.headers.get('X-Request-Id')
-        if x_request_id is not None:
-            print(x_request_id)
-        else:
-            print("No X-Request-Id header found in response")
-    except requests.exceptions.RequestException as e:
-        print("Error: {}".format(e))
-
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("Usage: {} <URL>".format(sys.argv[0]))
-        sys.exit(1)
-    
-    url = sys.argv[1]
-    fetch_and_display_x_request_id(url)
-
-
-
-import sys
-import requests
-
 def main():
-    if len(sys.argv) != 2:
+    """
+    Fethches a URL and displays the value of the X-Request-Id
+    variable in the response header.
+    Usage:
+        python script.py <URL>
+    Args:
+    None(Uses sys.argv to retrieve the URL from the command-line argument)
+    Returns:
+        None
+    """
+    if len(sys.argv) !=2:
         print("Usage: python script.py <URL>")
         return
 
-    url = sys.argv[1]
+    #retrieve the URL from the command-line argument
+    url = sys.argv[-1]
+    #try:
+    #send a GET reqquest to the specified URL
+    response = requests.get(url)
 
-    try:
-        response = requests.get(url)
+    #check if response status code is 200
+    if response.status_code == 200:
+        #retrieve value of X-Request-Id header drom the response
         x_request_id = response.headers.get('X-Request-Id')
 
+        #check if X-request-Id header exists in the response
         if x_request_id:
-            print(f"{x_request_id}")
-        else:
-            print("X-Request-Id header not found in the response.")
-    except requests.RequestException as e:
-        print(f"An error occurred: {e}")
+            print(x_request_id)
+            
 
 if __name__ == "__main__":
     main()
