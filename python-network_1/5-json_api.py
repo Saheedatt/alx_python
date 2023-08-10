@@ -25,7 +25,7 @@ def main():
     Returns:
         None
     """
-    if len(sys.argv) != 2:
+    if len(sys.argv) == 2:
         letter = sys.argv[1]
     else:
         letter = ""
