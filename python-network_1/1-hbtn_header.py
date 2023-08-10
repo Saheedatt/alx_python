@@ -18,6 +18,7 @@ def main():
     Returns:
         None
     """
+    
     if len(sys.argv) !=2:
         print("Usage: python script.py <URL>")
         return

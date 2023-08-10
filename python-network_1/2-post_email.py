@@ -11,6 +11,7 @@ def send_post_request_and_display_response(url, email):
     """
     Sends a POST request to the given URL with the email parameter and displays the response body.
     """
+    
     data = {'email': email}
     response = requests.post(url, data=data)
     
