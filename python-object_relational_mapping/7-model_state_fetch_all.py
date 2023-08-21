@@ -4,6 +4,7 @@ Script to list all State objects from the hbtn_0e_6_usa database.
 This module inherits from the previously built model_state.py.
 """
 
+
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -25,6 +26,9 @@ def list_states(username, password, database):
     # Create the SQLAlchemy engine
     engine = create_engine(connection_url)
 
+    # Bind the engine to the Base
+    Base.metadata.bind = engine
+
     # Create a session to interact with the database
     Session = sessionmaker(bind=engine)
     session = Session()
@@ -34,7 +38,7 @@ def list_states(username, password, database):
 
     # Print the results
     for state in states:
-        print("{}: {}".format(state.id, state.name))
+        print("{0}: {1}".format(state.id, state.name))
 
     # Close the session
     session.close()
