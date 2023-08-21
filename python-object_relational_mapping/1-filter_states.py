@@ -44,12 +44,13 @@ def list_states_with_n(username, password, database):
             # Create a cursor that aids interaction with database
             cursor = connection.cursor()
             # Execute the SQL query to retrieve state
-            query = (
+            search_letter = 'N'
+            query_template = (
                 "SELECT * FROM states "
-                "WHERE name LIKE 'N%' "
+                "WHERE BINARY name = '{}' "
                 "ORDER BY states.id ASC"
-            )
-            cursor.execute(query)
+            ).format(search_letter)
+            cursor.execute(query_template)
         # Fetch all the rows from the result
         rows = cursor.fetchall()
 
