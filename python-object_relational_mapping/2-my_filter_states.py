@@ -46,12 +46,12 @@ def search_states(username, password, database, search_name):
             # Create a cursor that aids interaction with database
             cursor = connection.cursor()
             # Create the SQL query using user input
-            query = (
+            query_template = (
                 "SELECT * FROM states "
-                "WHERE name = '{}' "
+                "WHERE BINARY name = '{}' "
                 "ORDER BY states.id ASC"
             ).format(search_name)
-            cursor.execute(query)
+            cursor.execute(query_template)
         # Fetch all the rows from the result
         rows = cursor.fetchall()
 
