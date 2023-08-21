@@ -15,10 +15,11 @@ Arguments:
     <number_of_rows>: Number of rows to retrieve.
 """
 
-import MySQLdb
-import sys
 
-def list_states(username, password, database, num_rows):
+import MySQLdb
+
+
+def main(username, password, database):
     """
     Fetches and lists specified number of rows from the hbtn_0e_0_usa database
 
@@ -30,30 +31,37 @@ def list_states(username, password, database, num_rows):
     Returns:
         None
     """
-    try:
-        # Connect to the server using context manager
-        connection = MySQLdb.connect(
-            host='localhost', user=username, passwd=password, db=database, port=3306
+    # Connect to the MySQL database
+    connection = MySQLdb.connect(
+        host="localhost",
+        port=3306, user=username,
+        password=password, db=database
         )
-        
-        # Create a cursor that aids interaction with the database
-        cursor = connection.cursor()
-        
-        # Execute the query to retrieve states with specified number of rows
-        query = f"SELECT * FROM states ORDER BY states.id ASC LIMIT {num_rows}"
-        cursor.execute(query)
-        
-        # Fetch all rows from the result
-        rows = cursor.fetchall()
-        
-        # Print results in the expected format (state id and name)
-        for row in rows:
-            print(row)
-    except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-    finally:
-        # Close the cursor object
-        cursor.close()
-        
-        # Close the connection to the database
-        connection.close()
+
+    # Create a cursor object
+    cursor = connection.cursor()
+
+    # Execute the query
+    cursor.execute("SELECT name FROM states ORDER BY id ASC")
+
+    # Fetch all rows
+    results = cursor.fetchall()
+
+    # Print the results
+    for row in results:
+        print(row[0])
+
+    # Close the cursor object
+    cursor.close()
+
+    # Close the connection to the database
+    connection.close()
+
+if __name__ == "__main__":
+    # Get the arguments
+    username = input("Enter MySQL username: ")
+    password = input("Enter MySQL password: ")
+    database = input("Enter MySQL database name: ")
+
+    # Run the main function
+    main(username, password, database)
