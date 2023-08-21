@@ -1,5 +1,5 @@
 """
-Script to list all states with a name starting with N(upper n) from
+Script to list all states with a name starting with N (upper N) from
 the hbtn_0e_0_usa database.
 
 Usage:
@@ -22,7 +22,8 @@ import sys
 
 def list_states_with_n(username, password, database):
     """
-    Fetches and lists all states from the hbtn_0e_0_usa database
+    Fetches and lists all states with a name starting with N (upper N)
+    from the hbtn_0e_0_usa database.
 
     Args:
         <username>: MySQL username.
@@ -40,23 +41,22 @@ def list_states_with_n(username, password, database):
             passwd=password,
             db=database,
             port=3306
-        )as connection:
-            # Create a cursor that aids interaction with database
+        ) as connection:
+            # Create a cursor that aids interaction with the database
             cursor = connection.cursor()
-            # Execute the SQL query to retrieve state
-            search_letter = 'N'
-            query_template = (
+            # Execute the SQL query to retrieve states
+            query = (
                 "SELECT * FROM states "
-                "WHERE BINARY name = '{}' "
+                "WHERE name LIKE 'N%' "
                 "ORDER BY states.id ASC"
-            ).format(search_letter)
-            cursor.execute(query_template)
-        # Fetch all the rows from the result
-        rows = cursor.fetchall()
+            )
+            cursor.execute(query)
+            # Fetch all the rows from the result
+            rows = cursor.fetchall()
 
-        # Print results
-        for row in rows:
-            print(row)
+            # Print results
+            for row in rows:
+                print(row)
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
