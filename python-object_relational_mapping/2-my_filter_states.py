@@ -1,6 +1,6 @@
 """
-Script to list all states with a name starting with N(upper n) from
-the hbtn_0e_0_usa database.
+Script that takes in an argument and displays all values in the states
+table of hbtn_0e_0_usa where name matches the argument.
 
 Usage:
     python script.py <username> <password> <database>
@@ -20,14 +20,16 @@ import MySQLdb
 import sys
 
 
-def list_states_with_n(username, password, database):
+def search_states(username, password, database, state_name):
     """
-    Fetches and lists all states from the hbtn_0e_0_usa database
+    Searches for and lists states from the hbtn_0e_0_usa database
+    that match the given state name.
 
     Args:
         <username>: MySQL username.
         <password>: MySQL password.
         <database>: Database name.
+        <search_name>: State name to search for.
     Returns:
         None
     """
@@ -40,16 +42,16 @@ def list_states_with_n(username, password, database):
             passwd=password,
             db=database,
             port=3306
-        )as connection:
+        ) as connection:
             # Create a cursor that aids interaction with database
             cursor = connection.cursor()
-            # Execute the SQL query to retrieve state
+            # Create the SQL query using user input
             query = (
                 "SELECT * FROM states "
-                "WHERE name LIKE 'N%' "
+                "WHERE name = %s "
                 "ORDER BY states.id ASC"
             )
-            cursor.execute(query)
+            cursor.execute(query, (state_name,))
         # Fetch all the rows from the result
         rows = cursor.fetchall()
 
@@ -60,10 +62,11 @@ def list_states_with_n(username, password, database):
         print("MySQL Error:", e)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python script.py <username> <password> <database>")
+    if len(sys.argv) != 5:
+        print("Usage: python script.py <username> <password> <database> <state_name>")
     else:
         username = sys.argv[1]
         password = sys.argv[2]
         database = sys.argv[3]
-        list_states_with_n(username, password, database)
+        state_name = sys.argv[4]
+        search_states(username, password, database, state_name)
