@@ -5,7 +5,8 @@ Usage:
     python script.py <username> <password> <database>
 
 This script connects to a MySQL server running on localhost at port 3306.
-It retrieves a sorted list of states from the specified database and displays them.
+It retrieves a sorted list of states from the specified database
+and displays them.
 
 Arguments:
     <username>: MySQL username.
@@ -17,10 +18,11 @@ Arguments:
 import MySQLdb
 import sys
 
+
 def list_states(username, password, database):
     """
     Fetches and lists all states from the hbtn_0e_0_usa database
-    
+
     Args:
         <username>: MySQL username.
         <password>: MySQL password.
@@ -30,19 +32,23 @@ def list_states(username, password, database):
     """
 
     try:
-        #connect to the server using context manager
+        # connect to the server using context manager
         with MySQLdb.connect(
-            host='localhost', user=username, passwd=password, db=database, port=3306
+            host='localhost',
+            user=username,
+            passwd=password,
+            db=database,
+            port=3306
         )as connection:
-            #create a cursor that aids interaction with database
+            # create a cursor that aids interaction with database
             cursor = connection.cursor()
-            #execute th sql query to retrieve states
+            # execute th sql query to retrieve states
             query = "SELECT * FROM states ORDER BY states.id ASC"
             cursor.execute(query)
-        #fetch all the rows from the result
+        # fetch all the rows from the result
         rows = cursor.fetchall()
 
-        #print results
+        # print results
         for row in rows:
             print(row)
     except MySQLdb.Error as e:
@@ -56,4 +62,3 @@ if __name__ == "__main__":
         password = sys.argv[2]
         database = sys.argv[3]
         list_states(username, password, database)
-        
