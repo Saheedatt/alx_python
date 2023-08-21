@@ -22,7 +22,8 @@ import sys
 
 def list_cities_by_state(username, password, database, state_name):
     """
-    Fetches and lists all cities of the specified state from the hbtn_0e_4_usa database.
+    Fetches and lists all cities of the specified state from the
+    hbtn_0e_4_usa database.
 
     Args:
         <username>: MySQL username.
@@ -67,7 +68,8 @@ def list_cities_by_state(username, password, database, state_name):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python script.py <username> <password> <database> <state_name>")
+        print("Usage: python script.py <username> <password> <database> "
+              "<state_name>")
     else:
         username = sys.argv[1]
         password = sys.argv[2]
