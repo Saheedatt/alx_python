@@ -6,7 +6,7 @@ Usage:
 
 This script connects to a MySQL server running on localhost at port 3306.
 It retrieves a sorted list of cities from the specified database
-and displays them.
+and displays them along with their state names.
 
 Arguments:
     <username>: MySQL username.
@@ -42,8 +42,13 @@ def list_cities(username, password, database):
         ) as connection:
             # Create a cursor that aids interaction with the database
             cursor = connection.cursor()
-            # Execute the SQL query to retrieve cities
-            query = "SELECT * FROM cities ORDER BY id ASC"
+            # Execute the SQL query to retrieve cities along with state names
+            query = (
+                "SELECT cities.id, cities.name, states.name "
+                "FROM cities "
+                "JOIN states ON cities.state_id = states.id "
+                "ORDER BY cities.id ASC"
+            )
             cursor.execute(query)
             # Fetch all the rows from the result
             rows = cursor.fetchall()
