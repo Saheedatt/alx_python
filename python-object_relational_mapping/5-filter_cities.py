@@ -46,7 +46,7 @@ def list_cities_by_state(username, password, database, state_name):
             cursor = connection.cursor()
             # Execute the SQL query to retrieve cities
             query = (
-                "SELECT cities.id, cities.name, states.name "
+                "SELECT cities.name "
                 "FROM cities "
                 "JOIN states ON cities.state_id = states.id "
                 "WHERE states.name = %s "
@@ -57,8 +57,11 @@ def list_cities_by_state(username, password, database, state_name):
             rows = cursor.fetchall()
 
             # Print results
-            for row in rows:
-                print(row)
+            city_names = [row[0] for row in rows]
+            if city_names:
+                print(", ".join(city_names))
+            else:
+                print()
     except MySQLdb.Error as e:
         print("MySQL Error:", e)
 
