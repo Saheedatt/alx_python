@@ -47,7 +47,7 @@ def list_states_with_n(username, password, database):
             # Execute the SQL query to retrieve states
             query = (
                 "SELECT * FROM states "
-                "WHERE name LIKE 'N%' "
+                "WHERE BINARY name LIKE 'N%' "
                 "ORDER BY states.id ASC"
             )
             cursor.execute(query)
