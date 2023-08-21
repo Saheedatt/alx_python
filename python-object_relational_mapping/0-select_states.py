@@ -14,7 +14,9 @@ Arguments:
     <database>: Database name.
 """
 
+
 import MySQLdb
+import sys
 
 
 def list_states(username, password, database):
@@ -28,35 +30,30 @@ def list_states(username, password, database):
     Returns:
         None
     """
-    # connect to the server using context manager
-    connection = MySQLdb.connect(host="localhost",
-                                port=3306,
-                                user=username,
-                                password=password,
-                                db=database
-                                )
-    # create a cursor that aids interaction with database
-    cursor = connection.cursor()
+    try:
+        # Connect to the server using context manager
+        connection = MySQLdb.connect(
+            host='localhost', user=username, passwd=password, db=database, port=3306
+        )
 
-    # Gets the number of records in the states table
-    cursor.execute("SELECT COUNT(*) FROM states")
-    row = cursor.fetchone()
-    num_records = row[0]
+        # Create a cursor that aids interaction with database
+        cursor = connection.cursor()
 
-    
-    # If there are no records, print an empty list
-    if num_records == 0:
-        print([])    
-    
-     # Otherwise, execute the query and print the results
-    else:
-        cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
-        results = cursor.fetchall()
+        # Execute the query to retrieve states
+        query = "SELECT * FROM states ORDER BY states.id ASC"
+        cursor.execute(query)
 
-        for row in results:
-            print(row[1])
+        # Fetch all rows from the result
+        rows = cursor.fetchall()
 
+        # Print results in the expected format
+        for row in rows:
+            print(row)
+    except MySQLdb.Error as e:
+        print("MySQL Error:", e)
+    finally:
         # Close the cursor object
         cursor.close()
-    # Close the connection to the database
+
+        # Close the connection to the database
         connection.close()
