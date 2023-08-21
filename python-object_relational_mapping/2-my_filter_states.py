@@ -5,8 +5,7 @@ table of hbtn_0e_0_usa where name matches the argument.
 Usage:
     python script.py <username> <password> <database>
 
-This script connects to a MySQL server running on
-localhost at port 3306.
+This script connects to a MySQL server running on localhost at port 3306.
 It retrieves a sorted list of states from the specified database
 and displays them.
 
@@ -23,8 +22,8 @@ import sys
 
 def search_states(username, password, database, search_name):
     """
-    Searches for and lists states from the hbtn_0e_0_usa
-    database that match the given state name.
+    Searches for and lists states from the hbtn_0e_0_usa database
+    that match the given state name.
 
     Args:
         <username>: MySQL username.

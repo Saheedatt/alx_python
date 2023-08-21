@@ -5,8 +5,8 @@ Usage:
     python script.py <username> <password> <database> <search_name>
 
 This script connects to a MySQL server running on localhost at port 3306.
-It retrieves a sorted list of states from the specified database based on the search criteria
-and displays them.
+It retrieves a sorted list of states from the specified database based
+on the search criteria and displays them.
 
 Arguments:
     <username>: MySQL username.
@@ -22,8 +22,9 @@ import sys
 
 def list_states_with_name(username, password, database, search_name):
     """
-    Fetches and lists states from the hbtn_0e_0_usa database based on search criteria.
-    
+    Fetches and lists states from the hbtn_0e_0_usa
+    database based on search criteria.
+
     Args:
         <username>: MySQL username.
         <password>: MySQL password.
@@ -44,7 +45,8 @@ def list_states_with_name(username, password, database, search_name):
         ) as connection:
             # Create a cursor that aids interaction with the database
             cursor = connection.cursor()
-            # Execute the SQL query to retrieve states using parameterized query
+            # Execute the SQL query to retrieve states using
+            # parameterized query
             query = (
                 "SELECT * FROM states "
                 "WHERE name = %s "
