@@ -46,7 +46,7 @@ def list_states_with_N(username, password, database):
             # Execute the SQL query to retrieve state
             query = (
                 "SELECT * FROM states "
-                "WHERE name LIKE 'N%' OR name LIKE 'n%' "
+                "WHERE name LIKE 'N%' "
                 "ORDER BY states.id ASC"
             )
             cursor.execute(query)
