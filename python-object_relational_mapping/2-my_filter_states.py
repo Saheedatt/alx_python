@@ -20,7 +20,7 @@ import MySQLdb
 import sys
 
 
-def search_states(username, password, database, state_name):
+def search_states(username, password, database, search_name):
     """
     Searches for and lists states from the hbtn_0e_0_usa database
     that match the given state name.
@@ -48,10 +48,10 @@ def search_states(username, password, database, state_name):
             # Create the SQL query using user input
             query = (
                 "SELECT * FROM states "
-                "WHERE name = %s "
+                "WHERE name = '{}' "
                 "ORDER BY states.id ASC"
-            )
-            cursor.execute(query, (state_name,))
+            ).format(search_name)
+            cursor.execute(query)
         # Fetch all the rows from the result
         rows = cursor.fetchall()
 
