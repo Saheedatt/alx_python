@@ -62,7 +62,8 @@ def list_states_with_name(username, password, database, search_name):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python script.py <username> <password> <database> <search_name>")
+        print("Usage: python script.py <username> <password> <database> "
+              "<search_name>")
     else:
         username = sys.argv[1]
         password = sys.argv[2]
