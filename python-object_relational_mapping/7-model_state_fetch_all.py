@@ -1,7 +1,8 @@
 """
 Script to list all State objects from the hbtn_0e_6_usa database.
 
-This module inherits from the previously built model_state.py.
+This script connects to a MySQL server running on localhost at port 3306
+and retrieves a sorted list of State objects from the specified database.
 """
 
 
@@ -9,6 +10,7 @@ from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import sys
+
 
 def list_states(username, password, database):
     """
@@ -26,14 +28,14 @@ def list_states(username, password, database):
     # Create the SQLAlchemy engine
     engine = create_engine(connection_url)
 
-    # Bind the engine to the Base
+    # Bind the Base class to the engine
     Base.metadata.bind = engine
 
     # Create a session to interact with the database
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Now, query and list all State objects sorted by id
+    # Query and list all State objects sorted by id
     states = session.query(State).order_by(State.id).all()
 
     # Print the results
