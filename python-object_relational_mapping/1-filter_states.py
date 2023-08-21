@@ -31,7 +31,7 @@ def list_states_with_N(username, password, database):
     Returns:
         None
     """
-    
+
     try:
         # Connect to the server using context manager
         with MySQLdb.connect(
@@ -41,10 +41,14 @@ def list_states_with_N(username, password, database):
             db=database,
             port=3306
         )as connection:
-        # Create a cursor that aids interaction with database
+            # Create a cursor that aids interaction with database
             cursor = connection.cursor()
-        # Execute the SQL query to retrieve state 
-            query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY states.id ASC"
+            # Execute the SQL query to retrieve state
+            query = (
+                "SELECT * FROM states "
+                "WHERE name LIKE 'N%' OR name LIKE 'n%' "
+                "ORDER BY states.id ASC"
+            )
             cursor.execute(query)
         # Fetch all the rows from the result
         rows = cursor.fetchall()
