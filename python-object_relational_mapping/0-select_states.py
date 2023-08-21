@@ -28,27 +28,34 @@ def list_states(username, password, database):
     Returns:
         None
     """
-    try:
-        # connect to the server using context manager
-        with MySQLdb.connect(
-            host='localhost', user=username, passwd=password, db=database, port=3306
-        )as connection:
-            # create a cursor that aids interaction with database
-            cursor = connection.cursor()
-            # execute th sql query to retrieve states
-            query = "SELECT * FROM states ORDER BY states.id ASC"
-            cursor.execute(query)
-        # fetch all the rows from the result
-        rows = cursor.fetchall()
+    # connect to the server using context manager
+    connection = MySQLdb.connect(host="localhost",
+                                port=3306,
+                                user=username,
+                                password=password,
+                                db=database
+                                )
+    # create a cursor that aids interaction with database
+    cursor = connection.cursor()
 
-        if len(rows) ==0:
-            print([])
-        else:
-            for row in rows:
-                print(row)
-    except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-    finally:
+    # Gets the number of records in the states table
+    cursor.execute("SELECT COUNT(*) FROM states")
+    row = cursor.fetchone()
+    num_records = row[0]
+
+    
+    # If there are no records, print an empty list
+    if num_records == 0:
+        print([])    
+    
+     # Otherwise, execute the query and print the results
+    else:
+        cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
+        results = cursor.fetchall()
+
+        for row in results:
+            print(row[1])
+
         # Close the cursor object
         cursor.close()
     # Close the connection to the database
