@@ -20,9 +20,10 @@ import MySQLdb
 import sys
 
 
-def list_states_with_name(username, password, state_name):
+def list_states_with_name(username, password, search_name):
     """
-    Fetches and lists all states from the hbtn_0e_0_usa database with the given name.
+    Fetches and lists all states from the hbtn_0e_0_usa database with
+    the given name.
 
     Args:
         <username>: MySQL username.
@@ -35,7 +36,7 @@ def list_states_with_name(username, password, state_name):
 
     try:
         # Connect to the server using context manager
-         with MySQLdb.connect(
+        with MySQLdb.connect(
             host='localhost',
             user=username,
             passwd=password,
@@ -44,7 +45,8 @@ def list_states_with_name(username, password, state_name):
         ) as connection:
             # Create a cursor that aids interaction with the database
             cursor = connection.cursor()
-            # Execute the SQL query to retrieve states using parameterized query
+            # Execute the SQL query to retrieve states using parameterized
+            # query
             query = (
                 "SELECT * FROM states "
                 "WHERE name = %s "
@@ -53,8 +55,7 @@ def list_states_with_name(username, password, state_name):
             cursor.execute(query, (state_name,))
             # Fetch all the rows from the result
             rows = cursor.fetchall()
-
-            
+  
             # Print results
             for row in rows:
                 print(row)
@@ -63,7 +64,8 @@ def list_states_with_name(username, password, state_name):
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
-        print("Usage: python script.py <username> <password> <database> <state_name>")
+        print("Usage: python script.py <username> <password> <database> "
+              "<state_name>")
     else:
         username = sys.argv[1]
         password = sys.argv[2]
