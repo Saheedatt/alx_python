@@ -22,6 +22,7 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 import sys
 
+
 def list_states_with_a(username, password, db_name):
     """
     List State objects containing the letter 'a' from the
