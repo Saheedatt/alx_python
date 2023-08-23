@@ -6,13 +6,12 @@ and retrieves a sorted list of State objects from the specified database.
 """
 
 
-from model_state import Base, State
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import sys
+from model_state import Base, State
 
-
-def list_states(username, password, database):
+if __name__ == "__main__":
     """
     Fetches and lists all State objects from the hbtn_0e_6_usa database.
 
@@ -23,33 +22,30 @@ def list_states(username, password, database):
     Returns:
         None
     """
-    # Create the connection URL
-    connection_url = 'mysql://{0}:{1}@localhost:3306/{2}'.format(username, password, database)
-    # Create the SQLAlchemy engine
-    engine = create_engine(connection_url)
 
-    # Bind the Base class to the engine
-    Base.metadata.bind = engine
+
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql username> <mysql password> <database name>".format(sys.argv[0]))
+        sys.exit(1)
+
+    username, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
+
+    # Create a connection to the MySQL server
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(username, password, db_name))
+
+    # Bind the engine to the Base class to enable declarative classes
+    Base.metadata.create_all(engine)
 
     # Create a session to interact with the database
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query and list all State objects sorted by id
+    # Query the database and list all State objects in ascending order by states.id
     states = session.query(State).order_by(State.id).all()
 
-    # Print the results
+    # Display the results
     for state in states:
-        print("{0}: {1}".format(state.id, state.name))
+        print("{}: {}".format(state.id, state.name))
 
     # Close the session
     session.close()
-
-if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python script.py <username> <password> <database>")
-    else:
-        username = sys.argv[1]
-        password = sys.argv[2]
-        database = sys.argv[3]
-        list_states(username, password, database)
