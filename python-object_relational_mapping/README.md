@@ -40,5 +40,5 @@ The scripts in this repository serve various purposes related to querying and ma
 - mysqlclient
 
 
-- Acknowledgements
+### Acknowledgements
 These scripts were created for educational purposes and practical learning. They were developed based on my understanding of SQL, databases, and SQLAlchemy. I would like to acknowledge the resources and tutorials provided by ALX and Holberton school that helped me gain the knowledge required to create these scripts.
