@@ -22,7 +22,8 @@ import sys
 
 def get_first_state(username, password, db_name):
     """
-    Retrieve and print the first State object from the specified MySQL database.
+    Retrieve and print the first State object from the
+    specified MySQL database.
 
     Args:
         username (str): MySQL username for database connection.
@@ -32,7 +33,7 @@ def get_first_state(username, password, db_name):
     # Create a connection
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(username, password, db_name))
-    
+
     # Bind the engine to the Base class to enable declarative classes
     Base.metadata.create_all(engine)
 
@@ -40,7 +41,7 @@ def get_first_state(username, password, db_name):
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query the database to retrieve the first State object in ascending order by states.id
+    # Query database to retrieve first State object in asc. order by states.id
     first_state = session.query(State).order_by(State.id).first()
 
     # Close the session
