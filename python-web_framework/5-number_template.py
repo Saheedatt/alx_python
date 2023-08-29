@@ -85,7 +85,7 @@ class WebApp:
             Args:
                 n (int): The number captured from the URL.
             """
-            return render_template('number_template.html', number=n)
+            return render_template('templates/5-number.html', number=n)
 
 if __name__ == '__main__':
     web_app = WebApp(app)
