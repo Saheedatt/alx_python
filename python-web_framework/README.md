@@ -37,3 +37,5 @@ Renders an HTML page with an H1 tag containing the text "Number: n is even|odd" 
 
 The application uses template files for rendering HTML content.
 
+## PROBLEMS ENCOUNTERED
+I had issues installing flask so I had to create a virtual environment to isolate it and prevent it from causing issues with other downloaded dependencies.
