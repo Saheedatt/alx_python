@@ -5,7 +5,7 @@ an additional route/path.
 
 from flask import Flask, escape, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 class WebApp:
     """
