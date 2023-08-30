@@ -3,7 +3,7 @@ A script that starts a Flask Web application and also has
 an additional route/path.
 """
 
-from flask import Flask, escape, render_template
+from flask import Flask, render_template
 
 app = Flask(__name__)
 """
