@@ -1,5 +1,6 @@
-import requests
+import json
 import sys
+import urllib.request
 
 def get_employee_data(employee_id):
     # Endpoint URLs for employee details and todo list
@@ -7,13 +8,13 @@ def get_employee_data(employee_id):
     todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id)
 
     # Fetch employee details
-    employee_response = requests.get(employee_url)
-    employee_data = employee_response.json()
-    employee_name = employee_data['name']
+    with urllib.request.urlopen(employee_url) as response:
+        employee_data = json.loads(response.read().decode())
+        employee_name = employee_data['name']
 
     # Fetch todo list
-    todo_response = requests.get(todo_url)
-    todo_data = todo_response.json()
+    with urllib.request.urlopen(todo_url) as response:
+        todo_data = json.loads(response.read().decode())
 
     # Display employee TODO list progress
     print("Employee {} is done with tasks({}/{}):".format(employee_name, sum(1 for task in todo_data if task['completed']), len(todo_data)))
