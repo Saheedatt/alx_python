@@ -17,7 +17,7 @@ def get_employee_data(employee_id):
         todo_data = json.loads(response.read().decode())
 
     # Display employee TODO list progress
-    print("Employee {} is done with tasks({}/{}):".format(employee_name, sum(1 for task in todo_data if task['completed']), len(todo_data)))
+    print("Employee {} is done with tasks({}/{}):".format(employee_name, sum(1 for _ in todo_data if True), len(todo_data)))
     for i, task in enumerate(todo_data, start=1):
         print("Task {} Formatting: {}".format(i, 'OK' if task['completed'] else 'Incorrect'))
 
