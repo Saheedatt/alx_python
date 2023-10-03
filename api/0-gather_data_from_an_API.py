@@ -2,30 +2,38 @@ import requests
 import sys
 
 def get_employee_info(employee_id):
-    # URL to get employee details
-    employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    response = requests.get(employee_url)
+    # Endpoint to get employee details
+    employee_endpoint = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    response = requests.get(employee_endpoint)
     employee_data = response.json()
-    employee_name = employee_data['name']
+    return employee_data
 
-    # URL to get employee's TODO list
-    todo_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-    response = requests.get(todo_url)
+def get_employee_todos(employee_id):
+    # Endpoint to get employee Todo list
+    todos_endpoint = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+    response = requests.get(todos_endpoint)
     todos_data = response.json()
+    return todos_data
 
-    total_tasks = len(todos_data)
-    completed_tasks = sum(1 for todo in todos_data if todo['completed'])
+def display_employee_progress(employee_id):
+    employee_info = get_employee_info(employee_id)
+    todos = get_employee_todos(employee_id)
 
-    print(f"First line formatting: OK")
+    employee_name = employee_info['name']
+    total_tasks = len(todos)
+    completed_tasks = sum(1 for todo in todos if todo['completed'])
+
+    # Adjusted formatting for the first line
     print(f"Employee {employee_name} is done with tasks ({completed_tasks}/{total_tasks}):")
-    for todo in todos_data:
+
+    for todo in todos:
         if todo['completed']:
             print(f"\t{todo['title']}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
+        print("Usage: python 0-gather_data_from_an_API.py <employee_id>")
         sys.exit(1)
 
     employee_id = int(sys.argv[1])
-    get_employee_info(employee_id)
+    display_employee_progress(employee_id)
