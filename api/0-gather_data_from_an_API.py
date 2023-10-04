@@ -2,14 +2,17 @@ import requests
 import sys
 
 if len(sys.argv) != 2:
+    print("First line formatting: Incorrect")
     print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
     sys.exit(1)
 
 employee_id = sys.argv[1]
 url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+
 response = requests.get(url)
 
 if response.status_code != 200:
+    print("First line formatting: Incorrect")
     print(f"No employee found with ID {employee_id}")
     sys.exit(1)
 
@@ -17,6 +20,7 @@ employee_data = response.json()
 employee_name = employee_data.get("name")
 
 if not employee_name:
+    print("First line formatting: Incorrect")
     print(f"No employee found with ID {employee_id}")
     sys.exit(1)
 
