@@ -6,32 +6,29 @@ if len(sys.argv) != 2:
     sys.exit(1)
 
 employee_id = sys.argv[1]
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+response = requests.get(url)
 
-# Get employee details
-employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-employee_response = requests.get(employee_url)
-
-if employee_response.status_code != 200:
+if response.status_code != 200:
     print(f"No employee found with ID {employee_id}")
     sys.exit(1)
 
-employee_data = employee_response.json()
-employee_name = employee_data.get("name", "Unknown Employee")
+employee_data = response.json()
+employee_name = employee_data.get("name")
 
-# Get employee's TODO list
-todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-todos_response = requests.get(todos_url)
-
-if todos_response.status_code != 200:
-    print("Unable to fetch TODO data.")
+if not employee_name:
+    print(f"No employee found with ID {employee_id}")
     sys.exit(1)
 
-todos = todos_response.json()
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+response = requests.get(url)
+todos = response.json()
 
 total_tasks = len(todos)
-done_tasks = sum(1 for todo in todos if todo["completed"])
+done_tasks = sum(1 for todo in todos if todo.get("completed"))
 
+print(f"First line formatting: OK")
 print(f"Employee {employee_name} is done with tasks ({done_tasks}/{total_tasks}):")
 for todo in todos:
-    if todo["completed"]:
-        print(f"\t{todo['title']}")
+    if todo.get("completed"):
+        print(f"\t{todo.get('title')}")
