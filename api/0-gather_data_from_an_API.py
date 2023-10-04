@@ -6,8 +6,8 @@ if len(sys.argv) !=2:
     sys.exit(1)
 
 employee_id = sys.argv[1]
-employee_name_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-response = requests.get(employee_name_url)
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+response = requests.get(url)
 employee_name = response.json().get("name")
 
 if not employee_name:
