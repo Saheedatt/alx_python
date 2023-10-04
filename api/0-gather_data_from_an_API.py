@@ -14,8 +14,8 @@ if not employee_name:
     print(f"No employee found with ID {employee_id}")
     sys.exit(1)
 
-employee_todo_list_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-response = requests.get(employee_todo_list_url)
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+response = requests.get(url)
 todos = response.json()
 
 total_tasks = len(todos)
