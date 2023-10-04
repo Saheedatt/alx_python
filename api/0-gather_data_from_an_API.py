@@ -1,7 +1,7 @@
 import requests
 import sys
 
-if len(sys.argv) != 2:
+if len(sys.argv)!=2:
     print("Usage: python3 get_employee_todo_list_progress.py <employee_id>")
     sys.exit(1)
 
