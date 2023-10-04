@@ -1,38 +1,27 @@
 import requests
+import sys
 
-def get_employee_todo_list_progress(employee_id):
+if len(sys.argv) != 2:
+    print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
+    sys.exit(1)
 
-  # Get employee details
-  employee_details_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-  employee_details_response = requests.get(employee_details_url)
-  employee_details = employee_details_response.json()
+employee_id = sys.argv[1]
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+response = requests.get(url)
+employee_name = response.json().get("name")
 
-  # Get employee TODO list
-  employee_todo_list_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-  employee_todo_list_response = requests.get(employee_todo_list_url)
-  employee_todo_list = employee_todo_list_response.json()
+if not employee_name:
+    print(f"No employee found with ID {employee_id}")
+    sys.exit(1)
 
-  # Calculate TODO list progress
-  number_of_done_tasks = 0
-  total_number_of_tasks = 0
-  for task in employee_todo_list:
-    total_number_of_tasks += 1
-    if task["completed"]:
-      number_of_done_tasks += 1
+url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+response = requests.get(url)
+todos = response.json()
 
-  # Display TODO list progress
-  print(f"Employee {employee_details['name']} is done with tasks {number_of_done_tasks}/{total_number_of_tasks}:")
-  for task in employee_todo_list:
-    if task["completed"]:
-      print(f"\t{task['title']}")
+total_tasks = len(todos)
+done_tasks = sum(1 for todo in todos if todo.get("completed"))
 
-if __name__ == "__main__":
-
-  # Get employee ID from user input
-  employee_id = input("Enter employee ID: ")
-
-  # Get employee TODO list progress
-  employee_todo_list_progress = get_employee_todo_list_progress(employee_id)
-
-  # Display TODO list progress
-  print(employee_todo_list_progress)
+print(f"Employee {employee_name} is done with tasks ({done_tasks}/{total_tasks}):")
+for todo in todos:
+    if todo.get("completed"):
+        print(f"\t{todo.get('title')}")
