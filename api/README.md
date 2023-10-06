@@ -12,4 +12,4 @@
 
 **Note: Delete this note and update the table of contents based on what sections you keep.**
 
-![](Screenshot(224).png)
+![Project Image](image/Screenshot(224).png)
