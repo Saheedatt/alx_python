@@ -13,3 +13,6 @@
 **Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ![Project Image](image/Screenshot(224).png)
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+
+- Live Link: [Live Link](www.google.com)
