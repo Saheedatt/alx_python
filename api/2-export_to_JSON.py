@@ -1,42 +1,32 @@
+#!/usr/bin/python3
+
 import json
 import requests
 import sys
 
+if __name__ == "__main__":
+    employee_id = sys.argv[1]
+    api_request = requests.get("https://jsonplaceholder.typicode.com/users/{}".format(employee_id))
+    api_request1 = requests.get("https://jsonplaceholder.typicode.com/users/{}/todos".format(employee_id))
+    data = api_request.text
+    pjson = json.loads(data)
+    data1 = api_request1.text
+    pjson1 = json.loads(data1)
 
-if len(sys.argv) != 2:
-    print("Usage: python3 0-gather_data_from_an_API.py <employee_id>")
-    sys.exit(1)
+    name_info = pjson['username']
 
-employee_id = sys.argv[1]
-url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-response = requests.get(url)
-employee_data = response.json()
+    filename = "{}.json".format(employee_id)
 
-if "id" not in employee_data:
-    print(f"No employee found with ID {employee_id}")
-    sys.exit(1)
+    # Create the dictionary structure
+    result = {
+        employee_id: [{
+            "task": item["title"],
+            "completed": item["completed"],
+            "username": name_info
+        } for item in pjson1]
+    }
 
-url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
-response = requests.get(url)
-todos = response.json()
+    # export data to json file
 
-employee_name = employee_data["username"]
-
-total_tasks = len(todos)
-done_tasks = sum(1 for todo in todos if todo.get("completed"))
-
-# Prepare the data in JSON format
-data = {
-    "USER_ID": [{
-        "task": todo["title"],
-        "completed": todo["completed"],
-        "username": employee_name
-    } for todo in todos]
-}
-
-# Write the JSON data to a file
-filename = f"{employee_id}.json"
-with open(filename, "w") as json_file:
-    json.dump({employee_id: data}, json_file, indent=4)
-
-print(f"Data exported to {filename}")
+    with open(filename, "w") as outfile:
+        json.dump(result, outfile)
