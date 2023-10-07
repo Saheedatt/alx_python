@@ -1,36 +1,30 @@
 # USE OF API
-TO DO THE H1-H6 TYPE HEADER TEXTS
-# Frontend Mentor - 3-column preview card component solution
-## Smaller trxt
-### h3 type text
-#### h4 type text
-
--- IF YOU WANT TO DO TABLE OF CONTENTS
-
-- [OVERWIEW](#overview)
-##### h5 type text
-
-###### h6 type text
-
-TO BOLDEN YOUR TEXTS
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
-TO ADD AN IMAGE TO YOUR README
-![Project Image](image/Screenshot(224).png)
-
-TO ADD LINKS TO YOUR README
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-
-- Live Link: [Live Link](www.google.com)
+This project focuses on leveraging Python to access and organize employee data via a REST API. The goal is to export this data into different data structures such as CSV and JSON formats, adhering to the PEP 8 style guide and using appropriate naming conventions for modules, classes, variables, functions, and constants.
 
 
-#  Bullet points
-- A new topic
-    - Another topic
-    - newer topic
-        - adjust to ths
-        - completed
+## Learning Objectives
+- What is an API and how to use it to access data
+- What is a REST API and its principles
+- Understanding microservices architecture
+- The CSV and JSON data formats
+- Proper Pythonic naming conventions and coding styles
 
-IF YOU WANT TO HIGHLIGHT CERTAIN TEXTS
-`REQUESTS`
+### Tasks
+- `0. Gather data from an API`:
+    - Write a Python script that retrieves and displays information about an employee's TODO list progress from a given REST API. The script takes an employee ID as a parameter and formats the output accordingly.
+- `1. Export to CSV`:
+    - Extend the Python script from Task #0 to export the employee's TODO list data to a CSV file. The CSV file should follow a specified format and naming convention.
+
+- `2. Export to JSON` :
+    - Extend the Python script from Task #0 to export the employee's TODO list data to a JSON file. The JSON file should follow a specified format and naming convention.
+
+- `3. Dictionary of list of dictionaries`
+    - Extend the Python script from Task #0 to export TODO list data for all employees into a single JSON file. The JSON file should follow a specified format and naming convention.
+
+
+
+
+**This project was the hardest for me since I started my journey 4 months ago**
+
+### Acknowledgment
+- Congratulations to me for on making it to the final week of ALX Intro to Software Engineering.
