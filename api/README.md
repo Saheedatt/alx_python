@@ -1,4 +1,4 @@
-    USE OF API
+# USE OF API
 TO DO THE H1-H6 TYPE HEADER TEXTS
 # Frontend Mentor - 3-column preview card component solution
 ## Smaller trxt
