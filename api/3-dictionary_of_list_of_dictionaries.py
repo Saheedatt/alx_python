@@ -1,37 +1,37 @@
 #!/usr/bin/python3
-'''Reads todo list from api for id passed and turns into json file'''
-
 import json
 import requests
-import sys
 
-base_url = 'https://jsonplaceholder.typicode.com/'
+def get_employee_data(employee_id):
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+
+    user_response = requests.get(user_url)
+    todos_response = requests.get(todos_url)
+
+    user_data = user_response.json()
+    todos_data = todos_response.json()
+
+    return user_data, todos_data
 
 
-def do_request():
-    '''Performs request'''
-    response = requests.get(base_url + 'users/')
-    if response.status_code != 200:
-        return print('Error: status_code:', response.status_code)
-    users = response.json()
+def get_all_employee_data():
+    all_employees_data = {}
 
-    response = requests.get(base_url + 'todos/')
-    if response.status_code != 200:
-        return print('Error: status_code:', response.status_code)
-    todos = response.json()
+    for employee_id in range(1, 11):
+        user_data, todos_data = get_all_employee_data(employee_id)
+        username = user_data['username']
+        complete_task =[{"username": username, "tasks": task['title'], "completed": task['completed']} for task in todos_data]
+        all_employees_data[employee_id] = complete_task
 
-    data = {}
-    for user in users:
-        user_todos = [todo for todo in todos
-                      if todo.get('userId') == user.get('id')]
-        user_todos = [{'username': user.get('username'),
-                       'task': todo.get('title'),
-                       'completed': todo.get('completed')}
-                      for todo in user_todos]
-        data[str(user.get('id'))] = user_todos
+    return all_employees_data
 
-    with open('todo_all_employees.json', 'w') as file:
-        json.dump(data, file)
 
-if __name__ == '__main__':
-    do_request()
+def export_to_json(data):
+    filename = "todo_all_employees.json"
+    with open(filename, 'w') as json_file:
+        json.dump(data, json_file)
+
+if __name__ == "__main__":
+    all_employees_data = get_all_employee_data()
+    export_to_json(all_employees_data)
